@@ -8,11 +8,13 @@
   with_items:
     - /etc/letsencrypt/hooks
     - /etc/letsencrypt/conf.d
+  
 
 - name: Copy certbot config
   ansible.builtin.template:
     src: etc/letsencrypt/conf.d/certificate.ini
     dest: /etc/letsencrypt/conf.d/{{ certbot.certname }}.ini
+    mode: 0644
 
 - name: Generate certificate
   ansible.builtin.command: 

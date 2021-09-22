@@ -2,6 +2,7 @@ galaxy_info:
   author: Michaël PAULON
   role_name: certbot
   namespace: mpaulon
+  description: "Ansible role: certificates management using certbot"
   license: MIT
 
   min_ansible_version: 4.5
