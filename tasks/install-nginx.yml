@@ -1,0 +1,6 @@
+- name: Install requirements
+  ansible.builtin.apt:
+    name:
+      - certbot
+      - nginx
+      - python3-certbot-nginx

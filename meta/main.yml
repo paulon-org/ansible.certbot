@@ -1,0 +1,13 @@
+galaxy_info:
+  author: Michaël PAULON
+  license: MIT
+
+  min_ansible_version: 4.5
+  platforms:
+    - name: Debian
+      versions:
+        - 11
+
+  galaxy_tags: []
+
+dependencies: []

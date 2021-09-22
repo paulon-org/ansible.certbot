@@ -1,0 +1,20 @@
+- include: "install-{{ certbot.authenticator }}.yml"
+
+- name: Create letsencrypt folder
+  ansible.builtin.file:
+    name: "{{ item }}"
+    state: directory
+    recurse: yes
+  with_items:
+    - /etc/letsencrypt/hooks
+    - /etc/letsencrypt/conf.d
+
+- name: Copy certbot config
+  ansible.builtin.template:
+    src: etc/letsencrypt/conf.d/certificate.ini
+    dest: /etc/letsencrypt/conf.d/{{ certbot.certname }}.ini
+
+- name: Generate certificate
+  ansible.builtin.command: 
+    cmd: certbot --non-interactive --config /etc/letsencrypt/conf.d/{{ certbot.certname }}.ini certonly
+    creates: /etc/letsencrypt/live/{{ certbot.certname }}/fullchain.pem
