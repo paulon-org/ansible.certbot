@@ -1,5 +1,7 @@
 galaxy_info:
   author: Michaël PAULON
+  role_name: certbot
+  namespace: mpaulon
   license: MIT
 
   min_ansible_version: 4.5
