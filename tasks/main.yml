@@ -1,5 +1,3 @@
-- include: "install-{{ certbot.authenticator }}.yml"
-
 - name: Install certbot
   ansible.builtin.apt:
     name: certbot
