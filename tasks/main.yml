@@ -43,8 +43,7 @@
     - clean.sh
   when: certbot.authenticator == "dns"
 
-- name: Copy dns key for dns challenge:
-- name: Copy scripts for dns challenge
+- name: Copy dns key for dns challenge
   ansible.builtin.template:
     src: "etc/letsencrypt/scripts/key.conf"
     dest: "/etc/letsencrypt/scrits/{{ certbot.certname }}-key.conf"
