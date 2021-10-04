@@ -1,5 +1,22 @@
 - include: "install-{{ certbot.authenticator }}.yml"
 
+- name: Install certbot
+  ansible.builtin.apt:
+    name: certbot
+
+- name: Install nginx and plugins
+  ansible.builtin.apt:
+    name: 
+      - nginx
+      - python3-certbot-nginx
+  when: certbot.authentcator == "nginx"
+
+- name: Install bind9 dns utils
+  ansible.builtin.apt:
+    name:
+      - bind9-dnsutils
+  when: certbot.authenticator == "dns"
+
 - name: Create letsencrypt folder
   ansible.builtin.file:
     name: "{{ item }}"
@@ -8,13 +25,31 @@
   with_items:
     - /etc/letsencrypt/hooks
     - /etc/letsencrypt/conf.d
-  
+    - /etc/letsencrypt/scripts
 
 - name: Copy certbot config
   ansible.builtin.template:
     src: etc/letsencrypt/conf.d/certificate.ini
     dest: /etc/letsencrypt/conf.d/{{ certbot.certname }}.ini
     mode: 0644
+
+- name: Copy scripts for dns challenge
+  ansible.builtin.template:
+    src: "etc/letsencrypt/scripts/{{ item }}"
+    dest: "/etc/letsencrypt/scrits/{{ certbot.certname }}-{{ item }}"
+    mode: 0744
+  with_items:
+    - auth.sh
+    - clean.sh
+  when: certbot.authenticator == "dns"
+
+- name: Copy dns key for dns challenge:
+- name: Copy scripts for dns challenge
+  ansible.builtin.template:
+    src: "etc/letsencrypt/scripts/key.conf"
+    dest: "/etc/letsencrypt/scrits/{{ certbot.certname }}-key.conf"
+    mode: 0600
+  when: certbot.authenticator == "dns"
 
 - name: Generate certificate
   ansible.builtin.command: 
