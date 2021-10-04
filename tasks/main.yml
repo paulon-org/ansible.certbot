@@ -34,7 +34,7 @@
 - name: Copy scripts for dns challenge
   ansible.builtin.template:
     src: "etc/letsencrypt/scripts/{{ item }}"
-    dest: "/etc/letsencrypt/scrits/{{ certbot.certname }}-{{ item }}"
+    dest: "/etc/letsencrypt/scripts/{{ certbot.certname }}-{{ item }}"
     mode: 0744
   with_items:
     - auth.sh
@@ -44,7 +44,7 @@
 - name: Copy dns key for dns challenge
   ansible.builtin.template:
     src: "etc/letsencrypt/scripts/key.conf"
-    dest: "/etc/letsencrypt/scrits/{{ certbot.certname }}-key.conf"
+    dest: "/etc/letsencrypt/scripts/{{ certbot.certname }}-key.conf"
     mode: 0600
   when: certbot.authenticator == "dns"
 
