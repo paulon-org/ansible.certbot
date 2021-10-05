@@ -1,4 +1,5 @@
-# Example with nginx
+# Examples
+## nginx authenticator
 ```
 - hosts: <hosts>
   vars:
@@ -10,7 +11,7 @@
   roles:
     - certbot
 ```
-# Exemple with dns
+# custom dns authenticator (support DNAMEs and odd DNS zones)
 ```
 - hosts: <hosts>
   vars:
@@ -22,7 +23,7 @@
       dns:
         server: dns1.example.org
         zone: example.org
-        record: _acme-challenge.example.org
+        record: _acme-challenge.example.org.
         keyname: dns_key.example.org
         secret: someverysecretkey
   roles:
