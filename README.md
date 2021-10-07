@@ -25,6 +25,7 @@
         zone: example.org
         record: _acme-challenge.example.org.
         keyname: dns_key.example.org
+        algorithm: hmac-sha512
         secret: someverysecretkey
   roles:
     - certbot
